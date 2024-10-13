@@ -1,4 +1,4 @@
-# Restaurant Chain Mockup
+# Restaurant Chain Mockup Extension
   
 
 ## 概要
