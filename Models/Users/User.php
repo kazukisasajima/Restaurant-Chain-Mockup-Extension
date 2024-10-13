@@ -100,7 +100,7 @@ class User {
                  - Email: {$this->email}
                  - Phone Number: {$this->phoneNumber}
                  - Address: {$this->address}
-                 - Birth Date: {$this->birthDate}
+                 - Birth Date: {$this->birthDate->format('Y-m-d')}
                  - Is Active: {$this->isActive}
                  - Role: {$this->role}";
     }
@@ -119,6 +119,7 @@ class User {
             'role' => $this->role
         ];
     }
+
     public function getID():int{
         return $this->id;
     }

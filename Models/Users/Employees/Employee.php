@@ -56,7 +56,7 @@ class Employee extends User implements FileConvertible{
              Awards: %\n",
             $this->jobTitle,
             $this->salary,
-            $this->startDate,
+            $this->startDate->format('Y-m-d'),
             $this->awards
         );
     }
@@ -80,7 +80,7 @@ class Employee extends User implements FileConvertible{
     public function toMarkdown(): string{
         return "- Job Title: {$this->jobTitle}
                 - Salary: {$this->salary}
-                - Start Date: {$this->startDate}
+                - Start Date: {$this->startDate->format('Y-m-d')}
                 - Awards: {$this->awards}";        
     }
 
@@ -88,7 +88,7 @@ class Employee extends User implements FileConvertible{
         return [
             "Job Title" => $this->jobTitle,
             "Salary" => $this->salary,
-            "Start Date" => $this->startDate,
+            "Start Date" => $this->startDate->format('Y-m-d'),
             "Awards" => $this->awards
         ];
     }

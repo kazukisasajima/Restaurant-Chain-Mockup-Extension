@@ -6,6 +6,7 @@ use Faker\Factory;
 use Models\Companies\Restaurants\RestaurantChain;
 use Models\Companies\Restaurants\RestaurantLocation;
 use Models\Users\Employees\Employee;
+use Models\Users\User;
 
 class RandomGenerator{
     public static function employee(): Employee{
@@ -39,6 +40,61 @@ class RandomGenerator{
         }
         return $employees;
     }
+
+    public static function generateEmployees(int $count, float $salary_min, float $salary_max, int $locations, int $zipcode_min, int $zipcode_max): array {
+        $faker = Factory::create();
+        $employees = [];
+        
+        for ($i = 0; $i < $count; $i++) {
+            $employees[] = new Employee(
+                $faker->randomNumber(),
+                $faker->firstName(),
+                $faker->lastName(),
+                $faker->email,
+                $faker->password,
+                $faker->phoneNumber,
+                $faker->address,
+                $faker->dateTimeThisCentury,
+                $faker->dateTimeBetween('-10 years', '+20 years'),
+                $faker->randomElement(['admin', 'user', 'editor']),
+                $faker->jobTitle(),
+                $faker->randomFloat(2, $salary_min, $salary_max),
+                $faker->dateTimeBetween('-10 years', 'now'),
+                [$faker->randomElement(['Great!!', 'Good!', 'Not bad', 'Same...'])]
+            );
+        }
+        return $employees;
+    }
+    
+
+    public static function user(): User {
+        $faker = Factory::create();
+
+        return new User(
+            $faker->randomNumber(),
+            $faker->firstName(),
+            $faker->lastName(),
+            $faker->email,
+            $faker->password,
+            $faker->phoneNumber,
+            $faker->address,
+            $faker->dateTimeThisCentury,
+            $faker->dateTimeBetween('-10 years','+10 years'),
+            $faker->randomElement(['admin', 'user', 'editor'])
+        );
+    }
+
+    public static function users(int $min, int $max): array {
+        $faker = Factory::create();
+        $users = [];
+        $numberOfUsers = $faker->numberBetween($min, $max);
+
+        for ($i = 0; $i < $numberOfUsers; $i++) {
+            $users[] = self::user();
+        }
+        return $users;
+    }
+
 
     public static function restauratLocation(): RestaurantLocation{
         $faker = Factory::create();
